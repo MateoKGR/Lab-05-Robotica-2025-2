@@ -26,49 +26,55 @@ Indice:
 flowchart TD
 
     A([Inicio])
-    B[Configurar TRIS y periféricos]
+    B[Configurar TRIS y perifericos]
     C[Inicializar variables]
     D[Configurar INT0, Timer0 y HLVD]
-    E{{Bucle while(1)}}
-    F[Leer boton (RC0)]
-    G[Mostrar RGB[nled] en LATE]
-    H[Leer botonReinicio y botonEmergencia]
-    I{{¿botonReinicio cambió?}}
-    J[Actualizar estdorei]
-    K{{¿botonReinicio == 1?}}
-    L[conteo = 0; nled = 0]
-    M[Continuar]
-    N{{¿estado == 1 y boton == 0?}}
-    O[Delay antirrebote (20ms)]
-    P{{¿RC0 sigue en 0?}}
-    Q[conteo++]
-    R{{¿conteo > 9?}}
-    S[conteo=0; nled++; buzzer 100ms]
-    T{{¿nled > 6?}}
-    U[nled = 0; buzzer 300ms]
-    V[Continuar]
-    W[Esperar hasta que RC0 vuelva a 1]
-    X[Delay 20ms]
-    Z[estado = boton]
-    ZA[LATD = conteo]
+    E{{Bucle principal}}
+    F[Leer RC0]
+    G[Actualizar LED RGB]
+    H[Leer boton de reinicio y emergencia]
 
+    I{{Cambio en botonReinicio}}
+    J[Actualizar estdorei]
+    K{{botonReinicio == 1}}
+    L[Reiniciar conteo y nled]
+    M[Continuar]
+
+    N{{estado == 1 y boton == 0}}
+    O[Antirrebote 20 ms]
+    P{{RC0 sigue en 0}}
+    Q[Incrementar conteo]
+    R{{conteo > 9}}
+    S[conteo=0; nled++; buzzer corto]
+
+    T{{nled > 6}}
+    U[nled=0; buzzer largo]
+    V[Continuar]
+
+    W[Esperar a que RC0 regrese a 1]
+    X[Delay de estabilizacion 20 ms]
+    Z[estado = boton]
+    ZA[Actualizar display 7 segmentos]
+
+    %% FLOW CONNECTIONS
     A --> B --> C --> D --> E
     E --> F --> G --> H --> I
 
-    I -->|Sí| J --> K
-    K -->|Sí| L --> M
+    I -->|Si| J --> K
+    K -->|Si| L --> M
     K -->|No| M
     I -->|No| M
 
     M --> N
-    N -->|Sí| O --> P
-    P -->|Sí| Q --> R
-    R -->|Sí| S --> T
-    T -->|Sí| U --> V
+    N -->|Si| O --> P
+    P -->|Si| Q --> R
+    R -->|Si| S --> T
+    T -->|Si| U --> V
     T -->|No| V
     R -->|No| V
 
     V --> W --> X --> Z --> ZA --> E
+
     P -->|No| Z
     N -->|No| Z
 
