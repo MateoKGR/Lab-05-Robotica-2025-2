@@ -86,39 +86,42 @@ flowchart TD
 flowchart TD
 
     A([Interrupcion])
-    B{{INT0IF == 1}}
-    C[Reset INT0IF y activar bandera de emergencia]
-    D{{banderaEmergencia == 1}}
-    E[Encender LED RGB rojo]
 
-    F{{TMR0IF == 1}}
-    G[Reset TMR0IF; recargar TMR0; toggle LED]
+    %% --- Parada de emergencia ---
+    B{{INT0IF igual a 1}}
+    C[Reset INT0IF y activar banderaEmergencia]
+    D{{banderaEmergencia igual a 1}}
+    E[Encender LED RGB en rojo]
+
+    F{{TMR0IF igual a 1}}
+    G[Reset TMR0IF, recargar TMR0 y alternar LED]
     H[Continuar]
 
     I[Leer botonReinicio]
-    J{{botonReinicio == 1}}
+    J{{botonReinicio igual a 1}}
     K[Desactivar banderaEmergencia]
 
-    L{{TMR0IF == 1 (normal)}}
-    M[Toggle LED 1 Hz]
+    %% --- Timer normal ---
+    L{{TMR0IF igual a 1 en modo normal}}
+    M[Alternar LED RA1]
 
-    O{{HLVDIF == 1}}
-    P[HLVDEN = 0]
-    R{{VDIRMAG == 0}}
-    S[precarga = 3036; VDIRMAG = 1]
-    T[precarga = 49911; VDIRMAG = 0]
-    U[HLVDEN = 1; HLVDIF = 0]
+    %% --- Bajo voltaje HLVD ---
+    O{{HLVDIF igual a 1}}
+    P[Deshabilitar HLVD]
+    R{{VDIRMAG igual a 0}}
+    S[precarga = 3036 y VDIRMAG = 1]
+    T[precarga = 49911 y VDIRMAG = 0]
+    U[Habilitar HLVD y limpiar HLVDIF]
 
-    V([Retorno])
+    V([Retornar de interrupcion])
 
-    %% FLOW
+    %% FLOW CONNECTIONS
     A --> B
     B -->|Si| C --> D
     D -->|Si| E --> F
     F -->|Si| G --> H
     F -->|No| H
     H --> I --> J
-
     J -->|Si| K --> L
     J -->|No| D
 
@@ -132,4 +135,5 @@ flowchart TD
     R -->|No| T --> U --> V
 
     O -->|No| V
+
 ```
