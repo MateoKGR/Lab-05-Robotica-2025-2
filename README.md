@@ -79,3 +79,57 @@ flowchart TD
     N -->|No| Z
 
 ```
+## Grafica 2
+
+```mermaid
+
+flowchart TD
+
+    A([Interrupcion])
+    B{{INT0IF == 1}}
+    C[Reset INT0IF y activar bandera de emergencia]
+    D{{banderaEmergencia == 1}}
+    E[Encender LED RGB rojo]
+
+    F{{TMR0IF == 1}}
+    G[Reset TMR0IF; recargar TMR0; toggle LED]
+    H[Continuar]
+
+    I[Leer botonReinicio]
+    J{{botonReinicio == 1}}
+    K[Desactivar banderaEmergencia]
+
+    L{{TMR0IF == 1 (normal)}}
+    M[Toggle LED 1 Hz]
+
+    O{{HLVDIF == 1}}
+    P[HLVDEN = 0]
+    R{{VDIRMAG == 0}}
+    S[precarga = 3036; VDIRMAG = 1]
+    T[precarga = 49911; VDIRMAG = 0]
+    U[HLVDEN = 1; HLVDIF = 0]
+
+    V([Retorno])
+
+    %% FLOW
+    A --> B
+    B -->|Si| C --> D
+    D -->|Si| E --> F
+    F -->|Si| G --> H
+    F -->|No| H
+    H --> I --> J
+
+    J -->|Si| K --> L
+    J -->|No| D
+
+    B -->|No| L
+
+    L -->|Si| M --> O
+    L -->|No| O
+
+    O -->|Si| P --> R
+    R -->|Si| S --> U --> V
+    R -->|No| T --> U --> V
+
+    O -->|No| V
+```
