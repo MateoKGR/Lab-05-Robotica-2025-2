@@ -25,43 +25,51 @@ Indice:
 
 flowchart TD
 
-    A([Inicio]) --> B[Configurar TRIS y periféricos]
-    B --> C[Inicializar variables: estado, conteo, nled, etc.]
-    C --> D[Configurar INT0, Timer0 y HLVD]
-    D --> E{{Bucle while(1)}}
+    A([Inicio])
+    B[Configurar TRIS y periféricos]
+    C[Inicializar variables]
+    D[Configurar INT0, Timer0 y HLVD]
+    E{{Bucle while(1)}}
+    F[Leer boton (RC0)]
+    G[Mostrar RGB[nled] en LATE]
+    H[Leer botonReinicio y botonEmergencia]
+    I{{¿botonReinicio cambió?}}
+    J[Actualizar estdorei]
+    K{{¿botonReinicio == 1?}}
+    L[conteo = 0; nled = 0]
+    M[Continuar]
+    N{{¿estado == 1 y boton == 0?}}
+    O[Delay antirrebote (20ms)]
+    P{{¿RC0 sigue en 0?}}
+    Q[conteo++]
+    R{{¿conteo > 9?}}
+    S[conteo=0; nled++; buzzer 100ms]
+    T{{¿nled > 6?}}
+    U[nled = 0; buzzer 300ms]
+    V[Continuar]
+    W[Esperar hasta que RC0 vuelva a 1]
+    X[Delay 20ms]
+    Z[estado = boton]
+    ZA[LATD = conteo]
 
-    E --> F[Leer boton (RC0)]
-    F --> G[Mostrar RGB[nled] en LATE]
-    G --> H[Leer botonReinicio (RB1) y botonEmergencia (RB0)]
+    A --> B --> C --> D --> E
+    E --> F --> G --> H --> I
 
-    H --> I{{¿botonReinicio cambió?}}
-    I -->|Sí| J[Actualizar estdorei]
-    J --> K{{¿botonReinicio == 1?}}
-    K -->|Sí| L[conteo = 0; nled = 0]
-    K -->|No| M[Continuar]
+    I -->|Sí| J --> K
+    K -->|Sí| L --> M
+    K -->|No| M
     I -->|No| M
 
-    M --> N{{¿estado == 1 y boton == 0?}}
-    N -->|Sí| O[Delay antirrebote 20ms]
-    O --> P{{¿RC0 sigue en 0?}}
-
-    P -->|Sí| Q[conteo++]
-    Q --> R{{¿conteo > 9?}}
-    R -->|Sí| S[conteo=0; nled++; buzzer 100ms]
-    S --> T{{¿nled > 6?}}
-    T -->|Sí| U[nled=0; buzzer 300ms]
-    T -->|No| V[Continuar]
-
+    M --> N
+    N -->|Sí| O --> P
+    P -->|Sí| Q --> R
+    R -->|Sí| S --> T
+    T -->|Sí| U --> V
+    T -->|No| V
     R -->|No| V
 
-    V --> W[Esperar hasta que RC0 vuelva a 1]
-    W --> X[Delay 20ms]
-    P -->|No| Y[Continuar]
+    V --> W --> X --> Z --> ZA --> E
+    P -->|No| Z
+    N -->|No| Z
 
-    X --> Z
-    Y --> Z
-
-    Z --> ZA[estado = boton]
-    ZA --> ZB[LATD = conteo]
-    ZB --> E
 ```
