@@ -52,6 +52,11 @@ Visualización completa en MATLAB
 ![MATLAB](images/dhcompleto.jpg)
 ![alt text](images/dhcompleto2.jpg)
 
+A continuación los diagramas digitales de las diferentes poses.
+
+![Diagrama digital pose 1](images/diagramadig.jpg)
+![Diagrama digital pose 2](images/diagramadig2.png)
+
 ## Diagrama de flujo de acciones del robot
 ## Plano de planta
 ## Descripción de las funciones utilizadas
