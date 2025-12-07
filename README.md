@@ -10,9 +10,10 @@ Laboratorio 5 de Robótica 2025-2s, realizado por Jeison Diaz y Mateo Ramos
 Indice:
 1. [Descripción detallada de la solución planteada](#descripcion)
 2. [Diagramas digitales y DH utilizado](#diagramas)
-3. [Plano de planta](#plano_planta)
-4. [Descripción de las funciones utilizadas](#funciones)
-5. [Gráfica digital](#grafica)
+3. [Diagrama de flujo de acciones del robot](#diagrama_flujo)
+4. [Videos](#videos)
+5. [Plano de planta](#plano_planta)
+6. [Código explicado](#codigo)
 
 
 ## Descripción detallada de la solución planteada
