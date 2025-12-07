@@ -56,6 +56,11 @@ Visualización completa en MATLAB
 ![MATLAB](images/dhcompleto.jpg)
 ![alt text](images/dhcompleto2.jpg)
 
+A continuación podemos observar la interfaz que implementamos.
+
+![Interfaz1](images/interfaz1.jpg)
+![Interfaz2](images/interfaz2.jpg)
+
 ## Graficas digitales comparativas
 A continuación los diagramas digitales de las diferentes poses.
 Empezando por HOME:
