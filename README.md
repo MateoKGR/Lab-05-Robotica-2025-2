@@ -58,17 +58,29 @@ Visualización completa en MATLAB
 
 ## Graficas digitales comparativas
 A continuación los diagramas digitales de las diferentes poses.
-
-
+Empezando por HOME:
 ![Diagrama digital pose HOME](images/diagramadig2.png)
-![Diagrama digital pose R4](images/diagramadig.jpg)
-![Diagrama digital pose R2 y R3](images/rutinar2yr3.png)
-Estas dos poses son equivalentes, solamente cambia q1.
 
+Continuamos con la pose R4:
+![Diagrama digital pose R4](images/diagramadig.jpg)
+
+Poses r2 y r3, estas dos poses son equivalentes, solamente cambia q1.
+![Diagrama digital pose R2 y R3](images/rutinar2yr3.png)
+
+A continuación las fotos de las poses implementadas:
+HOME:
 ![Home](images/homereal.jpg)
+
+R2:
 ![Rutina R2](images/r2.jpg)
+
+R3
 ![Rutina R3](images/r3.jpg)
+
+R4
 ![Rutina R4](images/r4.jpg)
+
+R5
 ![Rutina R5](images/r5.jpg)
 
 ## Diagrama de flujo de acciones del robot
