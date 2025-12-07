@@ -9,7 +9,7 @@ Laboratorio 5 de Robótica 2025-2s, realizado por Jeison Diaz y Mateo Ramos
 
 Indice:
 1. [Descripción detallada de la solución planteada](#descripcion)
-2. [Diagrama de flujo de acciones del robot](#diagrama)
+2. [Diagramas digitales y DH utilizado](#diagramas)
 3. [Plano de planta](#plano_planta)
 4. [Descripción de las funciones utilizadas](#funciones)
 5. [Gráfica digital](#grafica)
@@ -28,11 +28,13 @@ La arquitectura del sistema integra tres componentes principales:
 2. Interfaz gráfica (GUI) en Tkinter.
 3. Modelo del robot visualizado en RViz.
 
+*Funciones utilizadas*
 Control articular por sliders: Permite mover cada articulación del robot en tiempo real mediante deslizadores, respetando los límites físicos de los motores.
 Control articular por ingreso numérico: Permite ingresar directamente valores de posición para cada motor.
 Visualización en RViz: Se sincroniza el robot físico con el modelo virtual del PhantomX Pincher X100 usando `robot_state_publisher`.
 Cinemática directa (TCP): Se calcula la posición del TCP utilizando parámetros DH y se muestran las coordenadas X, Y y Z en tiempo real.
 Rutinas predefinidas: Se implementaron rutinas de movimiento que reproducen las poses solicitadas en el laboratorio.
+
 ## Diagramas digitales y DH utilizado
 La cinemática directa se implementó usando parámetros Denavit-Hartenberg medidos directamente del robot:
 
@@ -98,4 +100,9 @@ flowchart TD
     Publicar_Joint_States --> RViz
     RViz --> Actualizar_TCP
 ```
+## Videos 
+A continuación el video donde se demuestra el brazo alcanzando cada posición solicitada y la demostración de uso de la interfaz de usuario.
+
+- [Video – Ejecución de poses del robot y demostración de la interfaz gráfica](videos/demostraciones.mp4)
+
 ## Plano de planta
