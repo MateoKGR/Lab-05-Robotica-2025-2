@@ -68,7 +68,6 @@ flowchart TD
     Mover_Motor --> Publicar_Joint_States
     Publicar_Joint_States --> RViz
     RViz --> Actualizar_TCP
-´´´
 
 ## Plano de planta
 ## Descripción de las funciones utilizadas
