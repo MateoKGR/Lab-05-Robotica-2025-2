@@ -55,10 +55,20 @@ Visualización completa en MATLAB
 ![MATLAB](images/dhcompleto.jpg)
 ![alt text](images/dhcompleto2.jpg)
 
+## Graficas digitales comparativas
 A continuación los diagramas digitales de las diferentes poses.
 
-![Diagrama digital pose 1](images/diagramadig.jpg)
-![Diagrama digital pose 2](images/diagramadig2.png)
+
+![Diagrama digital pose HOME](images/diagramadig2.png)
+![Diagrama digital pose R4](images/diagramadig.jpg)
+![Diagrama digital pose R2 y R3](images/rutinar2yr3.png)
+Estas dos poses son equivalentes, solamente cambia q1.
+
+![Home](images/homereal.jpg)
+![Rutina R2](images/r2.jpg)
+![Rutina R3](images/r3.jpg)
+![Rutina R4](images/r4.jpg)
+![Rutina R5](images/r5.jpg)
 
 ## Diagrama de flujo de acciones del robot
 
@@ -199,3 +209,55 @@ Desde la interfaz gráfica es posible ejecutar RViz y visualizar el modelo tridi
 def emergency_stop(self):
 ```
 La parada de emergencia desactiva el torque de todos los motores y bloquea el envío de nuevos comandos, garantizando la seguridad del sistema y del usuario.
+
+*Aclaraciones importantes*
+
+```
+def r2_all_motors(self, list_q):
+
+    # Convertir radianes a Dynmixel
+        point_q = [self.radians_to_dxl(q) for q in list_q]
+
+    # Enviar cada posición al motor correspondiente
+        for index, motor_id in enumerate(self.dxl_ids):
+            if motor_id == 5:      # no mover la pinza
+                break
+
+            self.move_motor(motor_id, point_q[index])
+
+        self.get_logger().info('Todos los motores han sido movidos a las posiciones')
+```
+
+Dada una lista de posiciones (que serÍan los puntos de trabajo), estos puntos de trabajo entran en radianes, por lo que son convertidos a dxl, datos que leen los motores para poder moverse.
+
+```
+button_test2 = tk.Button(
+            buttons_frame,
+            text="Rutina2",
+            command=lambda: self.controller.r2_all_motors([0.44,0.44,0.35,-0.35,0])
+            )
+        button_test2.pack(side='left', padx=20)
+
+        button_test3 = tk.Button(
+            buttons_frame,
+            text="Rutina3",
+            command=lambda: self.controller.r2_all_motors([-0.61,0.61,-0.52,0.52,0])
+            )
+        button_test3.pack(side='left', padx=20)
+
+        button_test4 = tk.Button(
+            buttons_frame,
+            text="Rutina4",
+            command=lambda: self.controller.r2_all_motors([1.48,0.35,0.96,0.44,0])
+            )
+        button_test4.pack(side='left', padx=20)
+
+        button_test5 = tk.Button(
+            buttons_frame,
+            text="Rutina5",
+            command=lambda: self.controller.r2_all_motors([1.40,-0.61,0.96,-0.78,0])
+            )
+        button_test5.pack(side='left', padx=20)
+```
+Aquí se observan los diferentes botones que al darles click se genera la rutina.
+
