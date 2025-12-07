@@ -133,3 +133,68 @@ Estas librerías permiten la creación del nodo ROS 2, la comunicación con los 
 USE_XL430 = False
 ```
 Esta variable define el modelo de motor Dynamixel utilizado. Dependiendo de su valor, el código adapta automáticamente el protocolo de comunicación, las direcciones de memoria y los rangos de operación.
+
+3. Funciones auxiliares de comunicación
+
+```
+def write_goal_position(packet, port, dxl_id, position):
+def write_moving_speed(packet, port, dxl_id, speed):
+def read_present_position(packet, port, dxl_id):
+```
+Estas funciones encapsulan la lectura y escritura de registros en los motores Dynamixel. Su objetivo es abstraer las diferencias entre protocolos y simplificar el envío de comandos a los actuadores.
+
+4. Nodo ROS 2 – PincherController
+```
+class PincherController(Node):
+```
+Esta clase define el nodo principal del sistema. Se encarga de inicializar la comunicación serial con los motores, configurar los parámetros operativos, publicar los estados articulares, calcular la cinemática directa y gestionar la parada de emergencia.
+
+5. Parámetros ROS configurables
+```
+self.declare_parameter('port', '/dev/ttyUSB0')
+self.declare_parameter('baudrate', 1000000)
+self.declare_parameter('dxl_ids', [1, 2, 3, 4, 5])
+```
+Estos parámetros permiten modificar la configuración del sistema sin necesidad de alterar el código fuente, utilizando el sistema de parámetros de ROS 2.
+
+6. Publicación de estados articulares
+```
+self.joint_state_pub = self.create_publisher(
+    JointState, '/joint_states', 10)
+```
+El nodo publica periódicamente el estado de las articulaciones en el tópico /joint_states, lo que permite sincronizar el robot físico con su modelo virtual en RViz.
+
+7. Conversión entre valores Dynamixel y radianes
+```
+def dxl_to_radians(self, dxl_value):
+def radians_to_dxl(self, radians):
+```
+Estas funciones convierten los valores de posición de los motores Dynamixel a radianes y viceversa, facilitando los cálculos cinemáticos y la correcta visualización del estado del robot.
+
+8. Cálculo de la cinemática directa
+```
+def dh_transform(self, a, alpha, d, theta):
+```
+Esta función calcula la matriz de transformación homogénea utilizando los parámetros Denavit–Hartenberg para cada articulación del robot.
+```
+def update_tcp_position(self):
+```
+A partir de la matriz homogénea total se obtienen las coordenadas cartesianas X, Y y Z del TCP, las cuales se muestran en tiempo real en la interfaz gráfica.
+
+9. Interfaz gráfica de usuario (GUI)
+```
+class PincherGUI:
+```
+La interfaz gráfica fue desarrollada utilizando Tkinter y organizada en varias pestañas que permiten el control articular, la visualización del TCP y la ejecución de RViz.
+
+10. Integración con RViz
+```
+ros2 launch phantomx_pincher_description display.launch.py
+```
+Desde la interfaz gráfica es posible ejecutar RViz y visualizar el modelo tridimensional del manipulador sincronizado con el robot real.
+
+11. Parada de emergencia
+```
+def emergency_stop(self):
+```
+La parada de emergencia desactiva el torque de todos los motores y bloquea el envío de nuevos comandos, garantizando la seguridad del sistema y del usuario.
