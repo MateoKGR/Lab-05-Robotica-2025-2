@@ -58,16 +58,27 @@ A continuación los diagramas digitales de las diferentes poses.
 ![Diagrama digital pose 2](images/diagramadig2.png)
 
 ## Diagrama de flujo de acciones del robot
+
+```md
 ```mermaid
 flowchart TD
+    Inicio["Inicio del sistema"]
+    Inicializar_ROS["Inicializar ROS 2"]
+    Conectar_Motores["Conectar motores Dynamixel"]
+    Interfaz_GUI["Interfaz gráfica"]
+    Mover_Motor["Enviar comandos a motores"]
+    Publicar_Joint_States["Publicar /joint_states"]
+    RViz["RViz + robot_state_publisher"]
+    Actualizar_TCP["Actualizar TCP (FK)"]
+
     Inicio --> Inicializar_ROS
     Inicializar_ROS --> Conectar_Motores
     Conectar_Motores --> Interfaz_GUI
-    Interfaz_GUI -->|Slider| Mover_Motor
-    Interfaz_GUI -->|Valores| Mover_Motor
+    Interfaz_GUI --> Mover_Motor
     Mover_Motor --> Publicar_Joint_States
     Publicar_Joint_States --> RViz
     RViz --> Actualizar_TCP
+```
 
 ## Plano de planta
 ## Descripción de las funciones utilizadas
