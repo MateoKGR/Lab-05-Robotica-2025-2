@@ -58,9 +58,20 @@ A continuación los diagramas digitales de las diferentes poses.
 ![Diagrama digital pose 2](images/diagramadig2.png)
 
 ## Diagrama de flujo de acciones del robot
+```mermaid
+flowchart TD
+    Inicio --> Inicializar_ROS
+    Inicializar_ROS --> Conectar_Motores
+    Conectar_Motores --> Interfaz_GUI
+    Interfaz_GUI -->|Slider| Mover_Motor
+    Interfaz_GUI -->|Valores| Mover_Motor
+    Mover_Motor --> Publicar_Joint_States
+    Publicar_Joint_States --> RViz
+    RViz --> Actualizar_TCP
+´´´
+
 ## Plano de planta
 ## Descripción de las funciones utilizadas
-## Gráfica digital
 
 ```mermaid
 
