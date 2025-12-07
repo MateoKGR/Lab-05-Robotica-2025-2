@@ -16,6 +16,42 @@ Indice:
 
 
 ## Descripción detallada de la solución planteada
+Se desarrolló un nodo de ROS 2 en Python que permite:
+
+Comunicación directa con los motores Dynamixel mediante puerto serial.
+Control individual y conjunto de cada articulación del manipulador.
+Publicación del mensaje `/joint_states` para animación del modelo en RViz.
+Implementación de una interfaz gráfica con control articular, control numérico, visualización en RViz y cálculo de la posición del TCP mediante cinemática directa.
+
+La arquitectura del sistema integra tres componentes principales:
+1. Nodo ROS 2 de control de motores.
+2. Interfaz gráfica (GUI) en Tkinter.
+3. Modelo del robot visualizado en RViz.
+
+Control articular por sliders: Permite mover cada articulación del robot en tiempo real mediante deslizadores, respetando los límites físicos de los motores.
+Control articular por ingreso numérico: Permite ingresar directamente valores de posición para cada motor.
+Visualización en RViz: Se sincroniza el robot físico con el modelo virtual del PhantomX Pincher X100 usando `robot_state_publisher`.
+Cinemática directa (TCP): Se calcula la posición del TCP utilizando parámetros DH y se muestran las coordenadas X, Y y Z en tiempo real.
+Rutinas predefinidas: Se implementaron rutinas de movimiento que reproducen las poses solicitadas en el laboratorio.
+## Diagramas digitales y DH utilizado
+La cinemática directa se implementó usando parámetros Denavit-Hartenberg medidos directamente del robot:
+
+| i | θᵢ | dᵢ | aᵢ | αᵢ |
+|---|----|----|----|----|
+| 1 | q1 | L1 | 0  | -π/2 |
+| 2 | q2 | 0  | L2 | 0 |
+| 3 | q3 | 0  | L3 | 0 |
+| 4 | q4 | 0  | 0  | π/2 |
+
+A continuación los diagramas utilizados.
+
+![Diagrama DH](images/dh.jpg)
+
+Visualización completa en MATLAB
+
+![MATLAB](images/dhcompleto.jpg)
+![alt text](images/dhcompleto2.jpg)
+
 ## Diagrama de flujo de acciones del robot
 ## Plano de planta
 ## Descripción de las funciones utilizadas
