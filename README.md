@@ -127,3 +127,9 @@ import math
 import numpy as np
 ```
 Estas librerías permiten la creación del nodo ROS 2, la comunicación con los motores Dynamixel, la construcción de la interfaz gráfica de usuario, la ejecución de RViz y la realización de los cálculos matemáticos necesarios para la cinemática directa.
+
+2. Selección del tipo de motor Dynamixel
+```
+USE_XL430 = False
+```
+Esta variable define el modelo de motor Dynamixel utilizado. Dependiendo de su valor, el código adapta automáticamente el protocolo de comunicación, las direcciones de memoria y los rangos de operación.
