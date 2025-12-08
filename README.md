@@ -135,6 +135,9 @@ A continuación el video unificado donde se demuestra el brazo alcanzando cada p
 - [Video – Ejecución de poses del robot y demostración de la interfaz gráfica](videos/demostraciones.mp4)
 
 ## Plano de planta
+A continuación se muestra el plano de planta
+![Plano de planta](images/planodeplanta.png)
+
 ## Código
 Esta sección describe el código desarrollado para el laboratorio, el cual permite el control del manipulador Phantom X Pincher, el cálculo de la cinemática directa y la visualización del estado del robot mediante RViz y una interfaz gráfica.
 
