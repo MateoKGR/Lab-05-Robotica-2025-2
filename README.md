@@ -130,7 +130,7 @@ flowchart TD
     RViz --> Actualizar_TCP
 ```
 ## Videos 
-A continuación el video donde se demuestra el brazo alcanzando cada posición solicitada y la demostración de uso de la interfaz de usuario.
+A continuación el video unificado donde se demuestra el brazo alcanzando cada posición solicitada y la demostración de uso de la interfaz de usuario.
 
 - [Video – Ejecución de poses del robot y demostración de la interfaz gráfica](videos/demostraciones.mp4)
 
