@@ -132,7 +132,7 @@ flowchart TD
 ## Videos 
 A continuación el video unificado donde se demuestra el brazo alcanzando cada posición solicitada y la demostración de uso de la interfaz de usuario.
 
-- [Video – Ejecución de poses del robot y demostración de la interfaz gráfica](videos/demostraciones.mp4)
+- [Video – Ejecución de poses del robot y demostración de la interfaz gráfica](https://drive.google.com/drive/folders/1bRAAmgxF9P8DvvkPTRfy_nz_58mMI_Yz?usp=sharing)
 
 ## Plano de planta
 A continuación se muestra el plano de planta
